@@ -11,7 +11,7 @@ const logMiddleware = logger('dev');
 const securityMiddleware = helmet();
 
 server.use(parser, logMiddleware, securityMiddleware);
-server.use('/api/users', userRouter, userRouter);
+server.use('/api/users', userrouter, postrouter);
 
 server.get('/', async (req, res) => {
   res.send(`
