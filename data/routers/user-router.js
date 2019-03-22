@@ -5,6 +5,19 @@ const UserData = require('../helpers/userDb.js');
 const router = express.Router();
 
 
+//custom middleware
+const Middleware = (req, res, next) =>{
+    if (!req.body.name) {
+        res.status(400).json({ message: "Forgot about the name" });
+      } 
+      
+    else {
+        req.body.name = req.body.name.toUpperCase();
+        next();
+      }
+};
+
+
 
 // GET
 
@@ -62,7 +75,7 @@ router.post('/', async (req, res) => {
   
    //PUT (Update)
 
-router.put('/:id', async (req, res) => {
+   router.put('/:id', Middleware, async (req, res) => {
 
     if (!req.body.name) {
        res.status(400).json({ message: "Please provide a name for the user." });
